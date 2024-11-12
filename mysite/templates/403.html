@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Forbidden - 403 Error</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        .retro-font {
+            font-family: 'Press Start 2P', cursive;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen flex items-center justify-center p-4">
+    <div class="bg-white/10 backdrop-blur-lg rounded-3xl p-8 md:p-12 max-w-2xl w-full text-center text-white shadow-2xl">
+        <!-- Error Code -->
+        <div class="retro-font text-8xl md:text-9xl mb-6 text-white drop-shadow-[4px_4px_0px_rgba(30,64,175,1)]">
+            403
+        </div>
+
+        <!-- Title -->
+        <h1 class="retro-font text-2xl md:text-3xl mb-8 drop-shadow-[2px_2px_0px_rgba(30,64,175,1)]">
+            Access Denied!
+        </h1>
+
+        <!-- Emoji -->
+        <div class="text-6xl mb-8 animate-bounce">
+            🚫
+        </div>
+
+        <!-- Messages -->
+        <div class="space-y-4 mb-8">
+            <p class="text-lg md:text-xl">
+                Hold up! You don't have permission to access this area.
+            </p>
+            <p class="text-lg md:text-xl">
+                Please check your credentials or contact support.
+            </p>
+        </div>
+
+        <!-- Button -->
+        <a href="/" class="inline-block bg-blue-700 hover:bg-blue-800 text-white font-bold py-4 px-8 rounded-full 
+                          transform transition duration-300 hover:-translate-y-1 hover:shadow-lg">
+            Back to Safety 🔒
+        </a>
+    </div>
+
+    <!-- Floating elements -->
+    <div class="fixed top-0 left-0 w-full h-full pointer-events-none overflow-hidden -z-10">
+        <div class="absolute top-1/4 left-1/4 w-20 h-20 bg-blue-200/10 rounded-full blur-xl animate-pulse"></div>
+        <div class="absolute top-3/4 right-1/4 w-32 h-32 bg-blue-200/10 rounded-full blur-xl animate-pulse delay-700"></div>
+        <div class="absolute bottom-1/4 left-1/2 w-24 h-24 bg-blue-200/10 rounded-full blur-xl animate-pulse delay-1000"></div>
+    </div>
+</body>
+</html> 

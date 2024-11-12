@@ -1,0 +1,20 @@
+{% extends 'chatapp/base.html' %}
+
+{% block body %}
+    <div class="max-w-4xl mx-auto px-2 sm:px-4 py-4 sm:py-8">
+        <h1 class="text-2xl sm:text-3xl font-bold text-indigo-550 mb-4 sm:mb-8 border-b pb-4">
+            List of rooms
+        </h1>
+
+        {% for chatroom in chatrooms %}
+            <div class="transform transition-all duration-300 hover:scale-102 hover:shadow-xl mb-3 sm:mb-4">
+                <div class="bg-gradient-to-r from-blue-800/85 to-blue-900/85 p-4 sm:p-6 rounded-lg shadow-md">
+                    <a href="{% url 'chatroom-url' chatroom.slug %}" 
+                       class="block text-white text-lg sm:text-xl font-semibold hover:text-blue-100 transition-colors duration-200">
+                        {{ chatroom.name }}
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %} 

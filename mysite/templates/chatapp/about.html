@@ -1,0 +1,112 @@
+{% extends 'chatapp/base.html' %}
+{% load static %}
+
+{% block body %}
+<div class="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+    <!-- Hero Section -->
+    <div class="max-w-7xl mx-auto text-center mb-16">
+        <h1 class="text-4xl sm:text-5xl font-bold text-blue-600 mb-6">Welcome to Trio Talk</h1>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">Where Security Meets Simplicity in Real-Time Communication</p>
+    </div>
+
+    <!-- Features Grid -->
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+        <!-- End-to-End Encryption -->
+        <div class="bg-white rounded-xl shadow-lg p-6 transform transition duration-500 hover:scale-105">
+            <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">End-to-End Encryption</h3>
+            <p class="text-gray-600">Your messages are encrypted using military-grade encryption, ensuring your conversations remain private and secure.</p>
+        </div>
+
+        <!-- Real-Time Chat -->
+        <div class="bg-white rounded-xl shadow-lg p-6 transform transition duration-500 hover:scale-105">
+            <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+                </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">Instant Communication</h3>
+            <p class="text-gray-600">Experience seamless real-time messaging powered by WebSocket technology for instant message delivery.</p>
+        </div>
+
+        <!-- Multi-Language Support -->
+        <div class="bg-white rounded-xl shadow-lg p-6 transform transition duration-500 hover:scale-105">
+            <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/>
+                </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">Multi-Language Support</h3>
+            <p class="text-gray-600">Auto-detecting text direction for various languages, making it perfect for global communication.</p>
+        </div>
+    </div>
+
+    <!-- Statistics Section -->
+    <div class="bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl shadow-xl p-8 max-w-7xl mx-auto mb-16">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+            <div class="text-white">
+                <div class="text-4xl font-bold mb-2">100%</div>
+                <div class="text-blue-100">Message Encryption</div>
+            </div>
+            <div class="text-white">
+                <div class="text-4xl font-bold mb-2">Real-Time</div>
+                <div class="text-blue-100">Message Delivery</div>
+            </div>
+            <div class="text-white">
+                <div class="text-4xl font-bold mb-2">Seamless</div>
+                <div class="text-blue-100">Google Integration</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Technology Stack -->
+    <div class="max-w-7xl mx-auto text-center mb-16">
+        <h2 class="text-3xl font-bold text-gray-800 mb-8">Powered By Modern Technology</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div class="flex flex-col items-center">
+                <div class="text-5xl mb-4">🐍</div>
+                <div class="font-semibold">Python</div>
+            </div>
+            <div class="flex flex-col items-center">
+                <div class="text-5xl mb-4">🎯</div>
+                <div class="font-semibold">Django</div>
+            </div>
+            <div class="flex flex-col items-center">
+                <div class="text-5xl mb-4">🔐</div>
+                <div class="font-semibold">WebSockets</div>
+            </div>
+            <div class="flex flex-col items-center">
+                <div class="text-5xl mb-4">🎨</div>
+                <div class="font-semibold">Tailwind CSS</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-2xl font-bold text-gray-800 mb-4">Ready to Get Started?</h2>
+        <p class="text-gray-600 mb-8">Join our growing community of users who trust Trio Talk for their secure communication needs.</p>
+        <a href="{% url 'welcome-url' %}" 
+           class="inline-flex items-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 md:text-lg md:px-10">
+            Start Chatting Now
+        </a>
+    </div>
+</div>
+
+<!-- Add this to your base template's navigation -->
+<script>
+    // Add dark mode support for the about page
+    window.addEventListener('themeChanged', function() {
+        const isDark = document.body.classList.contains('bg-gray-900');
+        const featureCards = document.querySelectorAll('.bg-white');
+        featureCards.forEach(card => {
+            card.classList.toggle('bg-gray-800', isDark);
+            card.classList.toggle('bg-white', !isDark);
+        });
+    });
+</script>
+{% endblock %} 

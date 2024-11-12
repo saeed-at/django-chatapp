@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Connections</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+    <div class="max-w-4xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+        <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+            <!-- Header -->
+            <div class="bg-gradient-to-r from-blue-600 to-blue-700 px-8 py-6">
+                <h1 class="text-2xl font-bold text-white">Account Connections</h1>
+            </div>
+
+            <!-- Navigation -->
+            <nav class="bg-gray-50 border-b border-gray-200">
+                <!-- Same navigation as other pages -->
+            </nav>
+
+            <!-- Main Content -->
+            <div class="px-8 py-6">
+                <div class="space-y-6">
+                    {% if form.accounts %}
+                    <div class="bg-white shadow rounded-lg divide-y divide-gray-200">
+                        {% for base_account in form.accounts %}
+                        <div class="p-4 flex items-center justify-between">
+                            <div>
+                                <h3 class="text-lg font-medium text-gray-900">{{ base_account.get_provider_account.get_brand.name }}</h3>
+                                <p class="text-sm text-gray-500">{{ base_account.get_provider_account.get_brand.name }}</p>
+                            </div>
+                            <div>
+                                <form method="post" action="{% url 'socialaccount_connections' %}">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="account" value="{{ base_account.id }}"/>
+                                    <button type="submit" 
+                                            class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700">
+                                        Remove
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

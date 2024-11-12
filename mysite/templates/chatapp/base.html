@@ -1,0 +1,125 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg viewBox='0 0 165 165' xmlns='http://www.w3.org/2000/svg' width='165' height='165' fill='none'><path fill='%235DE8E8' d='M3 108.401c0-21.353 17.31-38.664 38.664-38.664H77.59c22.865 0 41.4 18.536 41.4 41.4 0 22.865-18.535 41.4-41.4 41.4H3v-44.136Z'/><path fill='%232B4FF1' d='M46.792 52.664C46.792 31.31 64.102 14 85.456 14h35.928c22.864 0 41.4 18.535 41.4 41.4s-18.536 41.4-41.401 41.4h-74.59V52.664Z'/><mask id='a' width='116' height='84' x='3' y='69' maskUnits='userSpaceOnUse' style='mask-type:alpha'><path fill='%235DE8E8' d='M3 108.401c0-21.353 17.31-38.664 38.664-38.664H77.59c22.865 0 41.4 18.536 41.4 41.4 0 22.865-18.535 41.4-41.4 41.4H3v-44.136Z'/></mask><g mask='url(%23a)'><path fill='%2300A5FD' d='M46.792 52.664C46.792 31.31 64.102 14 85.456 14h35.928c22.864 0 41.4 18.535 41.4 41.4s-18.536 41.4-41.401 41.4h-74.59V52.664Z'/></g></svg>">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Trio Talk</title>
+</head>
+<body class="bg-white text-black transition-colors">
+    <nav class="shadow-lg px-3 py-2.5">
+        <div class="container flex flex-wrap justify-between mx-auto">
+            <a class="flex items-center" href="{% url 'index-url' %}">
+                <img class="h-16 mr-3" 
+                     src="https://i.ibb.co/h7WkqK2/logo.png" 
+                     alt="Trio Talk Logo"
+                     onerror="console.log('Failed to load logo');">
+                <span class="self-center text-4xl font-semibold">Trio Talk</span>
+            </a> 
+          
+            <div class="block w-auto">
+                <ul id="rooms-about-box" class="flex flex-row items-center gap-4 p-6 mt-4">
+                    <li>
+                        <div class="bg-gray-100 dark:bg-gray-800 h-9 flex items-center px-3 rounded-lg gap-2">
+                            <svg class="w-4 h-4 text-gray-600 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                            </svg>
+                            <span class="text-gray-800 dark:text-gray-200">
+                                {% if request.user.is_authenticated %}
+                                    {{ request.user.username }} 
+                                {% else %}
+                                    Not logged in
+                                {% endif %}
+                            </span>
+                        </div>
+                    </li>
+                    <li><button id="theme-toggle" class="h-9 px-3 rounded-lg bg-blue-700 text-white flex items-center justify-center">☾ | ☀</button></li>
+                    
+                    {% if not is_welcome_page %}
+                    <li><a id="room-button" class="h-9 px-3 rounded-lg bg-blue-700 text-white flex items-center justify-center" href="{% url 'index-url' %}">Rooms</a></li>
+                    {% endif %}
+
+                    <li>
+                        <div class="relative">
+                            <button onclick="toggleSearchBox()" class="h-9 px-3 rounded-lg flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                                  </svg>
+                                  
+                            </button>
+                            <div id="searchBox" class="hidden absolute top-10 right-0 bg-white dark:bg-gray-800 border border-gray-300 p-4 rounded-lg shadow-md">
+                                <form action="{% url 'search-url' %}" method="GET" class="flex gap-2">
+                                    <input 
+                                        type="text" 
+                                        name="q" 
+                                        placeholder="Enter the room you are looking for..." 
+                                        class="w-64 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
+                                    >
+                                    <button 
+                                        type="submit" 
+                                        class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
+                                    >
+                                        Go
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    {% block body %}
+    {% endblock %}
+
+    <script>
+        // Dark/Light Mode Toggle Logic
+        const themeToggle = document.getElementById('theme-toggle');
+        const rootElement = document.documentElement;
+        const navBox = document.getElementById("rooms-about-box");
+        const roomButton = document.getElementById("room-button");
+
+        // Load saved theme or set dark theme as default
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === null || savedTheme === 'dark') {
+            applyDarkTheme();
+        }
+
+        themeToggle.addEventListener('click', () => {
+            if (document.body.classList.contains('bg-gray-900')) {
+                applyLightTheme();
+            } else {
+                applyDarkTheme();
+            }
+        });  
+
+        function applyDarkTheme() {
+            rootElement.classList.add('dark');
+            document.body.classList.replace('bg-white', 'bg-gray-900');
+            document.body.classList.replace('text-black', 'text-white');
+            themeToggle.textContent = '🌜 | ☼';
+            navBox.className = "flex flex-row gap-4 p-6 mt-4";
+            roomButton.className = "h-9 px-3 rounded-lg bg-blue-700 text-white flex items-center justify-center";
+            window.dispatchEvent(new Event('themeChanged'));
+        }
+
+        function applyLightTheme() {
+            rootElement.classList.remove('dark');
+            document.body.classList.replace('bg-gray-900', 'bg-white');
+            document.body.classList.replace('text-white', 'text-black');
+            themeToggle.textContent = '☾ | ☀';
+            navBox.className = "flex flex-row gap-4 p-6 mt-4";
+            roomButton.className = "h-9 px-3 rounded-lg bg-blue-700 text-white flex items-center justify-center";
+            window.dispatchEvent(new Event('themeChanged'));
+        }
+
+        function toggleSearchBox() {
+            const searchBox = document.getElementById('searchBox');
+            searchBox.classList.toggle('hidden');
+        }
+    </script>
+</body>
+</html> 
